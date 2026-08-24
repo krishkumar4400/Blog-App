@@ -3,6 +3,19 @@ import Blog from "../Model/Blog.js";
 import Comment from "../Model/Comment.js";
 import main from "../config/gemini.js";
 
+/**
+ * Admin-related controller actions for authentication, moderation, and dashboard operations.
+ */
+
+/**
+ * Authenticate an admin and issue a JWT token.
+ *
+ * @async
+ * @function adminLogin
+ * @param {import("express").Request} req - Express request object containing the admin email and password.
+ * @param {import("express").Response} res - Express response object used to send the auth result.
+ * @returns {Promise<void>} JSON response with login success, token, or validation errors.
+ */
 export const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -49,6 +62,15 @@ export const adminLogin = async (req, res) => {
   }
 };
 
+/**
+ * Fetch every blog for the admin panel, ordered by newest first.
+ *
+ * @async
+ * @function getAllBlogsAdmin
+ * @param {import("express").Request} req - Express request object.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response containing all blog records.
+ */
 export const getAllBlogsAdmin = async (req, res) => {
   try {
     const blogs = await Blog.find().sort({ createdAt: -1 });
@@ -67,6 +89,15 @@ export const getAllBlogsAdmin = async (req, res) => {
   }
 };
 
+/**
+ * Retrieve all comments with the associated blog data for moderation.
+ *
+ * @async
+ * @function getAllcomments
+ * @param {import("express").Request} req - Express request object.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response with populated comment records.
+ */
 export const getAllcomments = async (req, res) => {
   try {
     const comments = await Comment.find()
@@ -86,6 +117,15 @@ export const getAllcomments = async (req, res) => {
   }
 };
 
+/**
+ * Build the summary payload for the admin dashboard.
+ *
+ * @async
+ * @function getDashboardData
+ * @param {import("express").Request} req - Express request object.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response containing recent blogs, totals, and draft count.
+ */
 export const getDashboardData = async (req, res) => {
   try {
     const recentBlogs = await Blog.find().sort({ createdAt: -1 }).limit(5);
@@ -114,6 +154,15 @@ export const getDashboardData = async (req, res) => {
   }
 };
 
+/**
+ * Delete a comment from the database.
+ *
+ * @async
+ * @function deleteComment
+ * @param {import("express").Request} req - Express request object containing the comment ID.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response confirming deletion or reporting an error.
+ */
 export const deleteComment = async (req, res) => {
   try {
     const { commentId } = req.body;
@@ -134,6 +183,15 @@ export const deleteComment = async (req, res) => {
   }
 };
 
+/**
+ * Approve a submitted comment so it becomes visible to readers.
+ *
+ * @async
+ * @function approveComment
+ * @param {import("express").Request} req - Express request object containing the comment ID.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response with approval status and updated comment data.
+ */
 export const approveComment = async (req, res) => {
   try {
     const { commentId } = req.body;
@@ -156,6 +214,15 @@ export const approveComment = async (req, res) => {
   }
 };
 
+/**
+ * Log out the admin user from the active session.
+ *
+ * @async
+ * @function logout
+ * @param {import("express").Request} req - Express request object.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response confirming logout.
+ */
 export const logout = async (req, res) => {
   try {
     return res.json({
@@ -172,6 +239,15 @@ export const logout = async (req, res) => {
   }
 };
 
+/**
+ * Generate a blog content draft using the configured AI model.
+ *
+ * @async
+ * @function generateContent
+ * @param {import("express").Request} req - Express request object with the content prompt.
+ * @param {import("express").Response} res - Express response object.
+ * @returns {Promise<void>} JSON response with the generated content or an error message.
+ */
 export const generateContent = async (req, res) => {
   try {
     const { prompt } = req.body;
