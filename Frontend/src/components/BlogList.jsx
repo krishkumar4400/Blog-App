@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BlogCard from "./BlogCard";
-import { blog_data, blogCategories } from "../assets/assets";
-import {motion, spring} from 'motion/react';
+import { blogCategories } from "../assets/assets";
+import { spring } from "motion/react";
 import { useAppContext } from "../context/AppContext";
 
 const BlogList = () => {
   const [menu, setMenu] = useState("All");
-  const {blogs, input} = useAppContext();
+  const { blogs, input } = useAppContext();
 
   const filteredBlogs = () => {
-    if(input === '') {
+    if (input === "") {
       return blogs;
     }
 
-    return blogs.filter((blog) => blog.title.toLowerCase().includes(input.toLowerCase()) || blog.category.toLowerCase().includes(input.toLowerCase()));
-  }
+    return blogs.filter(
+      (blog) =>
+        blog.title.toLowerCase().includes(input.toLowerCase()) ||
+        blog.category.toLowerCase().includes(input.toLowerCase()),
+    );
+  };
 
   return (
     <div className="mt-8">
@@ -22,7 +26,7 @@ const BlogList = () => {
       <div className="flex items-center justify-center gap-3 px-4 mb-10 relative flex-wrap">
         {blogCategories.map((category, index) => (
           <motion.div
-          transition={{type:spring, stiffness: 500, damping:30}}
+            transition={{ type: spring, stiffness: 500, damping: 30 }}
             onClick={() => setMenu(category)}
             key={index}
             className={`px-6 py-2 text-sm font-medium rounded-full border border-gray-300 transition-all duration-200 relative cursor-pointer
@@ -39,11 +43,11 @@ const BlogList = () => {
 
       {/* Blog Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 mb-25 mx-8 ms:mx-15 xl:mx-40">
-        {
-          filteredBlogs().filter((blog) => menu === "All" ? true : blog.category === menu).map((blog) => (
+        {filteredBlogs()
+          .filter((blog) => (menu === "All" ? true : blog.category === menu))
+          .map((blog) => (
             <BlogCard key={blog._id} blog={blog} />
-          ))
-        }
+          ))}
       </div>
     </div>
   );

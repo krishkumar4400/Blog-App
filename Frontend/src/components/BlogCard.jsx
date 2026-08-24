@@ -1,9 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-const BlogCard = ({blog}) => {
-
-  const {title, image, description, category, _id} = blog;
+const BlogCard = ({ blog }) => {
+  const { title, image, description, category, _id } = blog;
   const navigate = useNavigate();
 
   return (
@@ -25,6 +23,6 @@ const BlogCard = ({blog}) => {
       </div>
     </div>
   );
-}
+};
 
-export default BlogCard
+export default BlogCard;

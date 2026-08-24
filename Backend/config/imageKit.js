@@ -5,6 +5,5 @@ const imageKit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT, // spelling: urlEndpoint
 });
-// console.log(imageKit);
 
 export default imageKit;

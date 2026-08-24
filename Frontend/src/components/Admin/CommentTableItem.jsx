@@ -1,4 +1,3 @@
-import React from "react";
 import { assets } from "../../assets/assets.js";
 import { useAppContext } from "../../context/AppContext.jsx";
 import toast from "react-hot-toast";
@@ -10,14 +9,16 @@ const CommentTableItem = ({ comment, fetchComments }) => {
 
   const deleteComment = async () => {
     try {
-      const confirm = window.confirm("Are you sure you want to delete the comment");
-      if(!confirm) {
+      const confirm = window.confirm(
+        "Are you sure you want to delete the comment",
+      );
+      if (!confirm) {
         return;
       }
       const { data } = await axios.post("/api/admin/delete-comment", {
         commentId: _id,
       });
-      if (data.success){
+      if (data.success) {
         toast.success(data.message);
         fetchComments();
       } else {
@@ -63,7 +64,7 @@ const CommentTableItem = ({ comment, fetchComments }) => {
         <div className="inline-flex items-center gap-4">
           {!comment.isApproved ? (
             <img
-            onClick={approveComment}
+              onClick={approveComment}
               src={assets.tick_icon}
               className="w-5 hover:scale-110 transition-all cursor-pointer"
               alt="tick_icon"

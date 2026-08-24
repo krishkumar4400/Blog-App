@@ -1,14 +1,11 @@
-import React from 'react'
-import { assets } from '../assets/assets'
-import { useNavigate } from 'react-router-dom'
-import { useAppContext } from '../context/AppContext';
-import toast from 'react-hot-toast';
+import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const {axios, token} = useAppContext();
-
+  const { token } = useAppContext();
 
   return (
     <div className="flex items-center justify-between px-5 sm:px-12 py-6">
@@ -27,6 +24,6 @@ const Navbar = () => {
       </button>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

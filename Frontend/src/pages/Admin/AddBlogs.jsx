@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { assets, blogCategories } from "../../assets/assets.js";
 import Quill from "quill";
 import { useAppContext } from "../../context/AppContext.jsx";

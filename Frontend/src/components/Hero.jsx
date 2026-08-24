@@ -1,6 +1,5 @@
-import React from 'react'
-import { assets } from '../assets/assets'
-import SearchBar from './SearchBar';
+import { assets } from "../assets/assets.js";
+import SearchBar from "./SearchBar";
 
 const Hero = () => {
   return (
@@ -20,15 +19,15 @@ const Hero = () => {
           Your own <span className="text-blue-600">blogging</span> <br />{" "}
           platform.
         </h1>
-        <p className='text-gray-500 max-sm:text-sm max-w-2xl m-auto mb-6 sm:mb-8'>
+        <p className="text-gray-500 max-sm:text-sm max-w-2xl m-auto mb-6 sm:mb-8">
           This is your space to think out loud, to share what matters, and to
           write without filters. Whether it’s one word or a thousand, your story
           starts right here
         </p>
-        <SearchBar/>
+        <SearchBar />
       </div>
     </div>
   );
-}
+};
 
-export default Hero
+export default Hero;

@@ -1,25 +1,24 @@
-import React, { useRef, useState } from 'react'
-import { useAppContext } from '../context/AppContext';
+import { useRef } from "react";
+import { useAppContext } from "../context/AppContext";
 
 const SearchBar = () => {
-  
-  const {setInput, input} = useAppContext();
+  const { setInput, input } = useAppContext();
   const inputRef = useRef();
 
-  const onSubmitHandler = async(e) => {
-      e.preventDefault();
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
 
-      try {
-        setInput(inputRef.current.value);
-      } catch (error) {
-        console.log(error.message);
-      }
-  }
+    try {
+      setInput(inputRef.current.value);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const onClear = () => {
-    setInput('');
-    inputRef.current.value = '';
-  }
+    setInput("");
+    inputRef.current.value = "";
+  };
 
   return (
     <div className="">
@@ -42,13 +41,16 @@ const SearchBar = () => {
       </div>
       <div className="text-center">
         {input && (
-          <button onClick={onClear} className="border font-light text-xs py-1 px-3 rounded-xs shadow cursor-pointer">
+          <button
+            onClick={onClear}
+            className="border font-light text-xs py-1 px-3 rounded-xs shadow cursor-pointer"
+          >
             Clear Search
           </button>
         )}
       </div>
     </div>
   );
-}
+};
 
-export default SearchBar
+export default SearchBar;
